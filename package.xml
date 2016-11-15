@@ -4,8 +4,7 @@
   <version>0.1.0</version>
   <description>A ROS package that simplifies robot interaction using web interfaces</description>
 
-  <maintainer email="ahcorde@erlerobot.com">Alejandro Hernández Cordero</maintainer>
-  <maintainer email="victor@erlerobot.com">Víctor Mayoral Vilches</maintainer>
+  <maintainer email="marc@hanheide.net">Marc Hanheide</maintainer>
 
   <license>GPLv3</license>
 
