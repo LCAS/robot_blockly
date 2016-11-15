@@ -2,8 +2,8 @@
 Changelog for package robot_blockly
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.1 (2016-11-15)
+------------------
 * Merge pull request `#1 <https://github.com/LCAS/robot_blockly/issues/1>`_ from LCAS/marc-hanheide-patch-1
   adding missing dependency rospy
 * adding missing dependency rospy
