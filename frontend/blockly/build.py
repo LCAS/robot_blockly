@@ -407,6 +407,10 @@ class Gen_langfiles(threading.Thread):
     # <lang>.js file.  Rebuilding is easy and cheap, so just go ahead and do it.
     try:
       # Use create_messages.py to create .js files from .json files.
+      try:
+        os.mkdir(os.path.join("msg", "js"))
+      except:
+        pass
       cmd = [
           "python",
           os.path.join("i18n", "create_messages.py"),
