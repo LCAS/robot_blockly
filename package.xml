@@ -5,6 +5,7 @@
   <description>A ROS package that simplifies robot interaction using web interfaces</description>
 
   <maintainer email="marc@hanheide.net">Marc Hanheide</maintainer>
+  <maintainer email="pbaxter@lincoln.ac.uk">Paul Baxter</maintainer>
 
   <license>GPLv3</license>
 
@@ -13,6 +14,8 @@
   <!-- <url type="website">http://wiki.ros.org/ros_erle_pwm</url> -->
 
 
+  <author email="marc@hanheide.net">Marc Hanheide</author>
+  <author email="pbaxter@lincoln.ac.uk">Paul Baxter</author>
   <author email="ahcorde@erlerobot.com">Alejandro Hernández Cordero</author>
   <author email="victor@erlerobot.com">Víctor Mayoral Vilches</author>
 
