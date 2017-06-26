@@ -1,3 +1,4 @@
 .DS_Store
 scripts/test.py
 scripts/__pycache__/
+frontend/blockly/msg/js/*.js
