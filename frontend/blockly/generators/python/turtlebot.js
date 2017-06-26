@@ -21,28 +21,17 @@
  * @fileoverview Blocks for Erle-Spider.
  * @author victor@erlerobot.com (Víctor Mayoral Vilches)
  * @author ahcorde@erlerobot.com (Alejandro Hernández Cordero)
-*/
+ */
 'use strict';
 
-goog.provide('Blockly.Blocks.turtlebot');
-goog.require('Blockly.Blocks');
+goog.provide('Blockly.Python.turtlebot');
+goog.require('Blockly.Python');
 
 
-/**
- * Common HSV hue for all blocks in this category.
- */
-Blockly.Blocks.brain.HUE = 260;
+Blockly.Python['turtle_move_forwards'] = function(block) {
+    var varName = Blockly.Python.valueToCode(block, 'velocity', Blockly.Python.ORDER_ATOMIC);
 
-
-Blockly.Blocks['turtle_move_forwards'] = {
-    init: function() {
-        this.appendValueInput("velocity")
-            .appendField("Linear Velocity");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour(0);
-        this.setTooltip('hey!');
-        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
-    }
-};
+    var code = "vel = " + varName + "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_move_forwards.py");
+    return code
+}
