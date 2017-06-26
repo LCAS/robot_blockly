@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
-import http.server
-import socketserver
+#!/usr/bin/env python
+import SimpleHTTPServer #http.server
+import SocketServer
 import socket
 import os
 from rospkg import RosPack
@@ -17,9 +17,9 @@ HOST = socket.gethostname()
 PORT = 1036
 address = ("",PORT)
 
-Handler = http.server.SimpleHTTPRequestHandler
+Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
 
-httpd = socketserver.TCPServer(address, Handler)
+httpd = SocketServer.TCPServer(address, Handler)
 
 print("serving at port", PORT)
 httpd.serve_forever()
