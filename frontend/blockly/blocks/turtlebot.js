@@ -37,12 +37,63 @@ Blockly.Blocks.brain.HUE = 260;
 Blockly.Blocks['turtle_move_forwards'] = {
     init: function() {
         this.appendValueInput("velocity")
-            .appendField("Linear Velocity");
+            .appendField("Forward Speed");
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(0);
-        this.setTooltip('hey!');
+        this.setTooltip('move forwards with this speed');
         this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
     }
+};
+
+Blockly.Blocks['turtle_move_backwards'] = {
+    init: function() {
+        this.appendValueInput("velocity")
+            .appendField("Backward Speed");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(0);
+        this.setTooltip('move backwards with this speed');
+        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+    }
+};
+
+Blockly.Blocks['turtle_turn_left'] = {
+    init: function() {
+        this.appendValueInput("rotation")
+            .appendField("Rotation Left Speed");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(0);
+        this.setTooltip('turn left with this speed');
+        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+    }
+};
+
+Blockly.Blocks['turtle_turn_right'] = {
+    init: function() {
+        this.appendValueInput("rotation")
+            .appendField("Rotation Right Speed");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(0);
+        this.setTooltip('turn right with this speed');
+        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+    }
+};
+
+Blockly.Blocks['turtle_distance_middle'] = {
+  init: function() {
+    this.appendValueInput("middledistance")
+        .appendField("Laser Distance Middle");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(0);
+    this.setTooltip('this is the middle distance value');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
+  }
 };
