@@ -35,3 +35,37 @@ Blockly.Python['turtle_move_forwards'] = function(block) {
     code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_move_forwards.py");
     return code
 }
+
+Blockly.Python['turtle_move_backwards'] = function(block) {
+    var varName = Blockly.Python.valueToCode(block, 'velocity', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "vel = " + varName + "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_move_backwards.py");
+    return code
+}
+
+Blockly.Python['turtle_turn_left'] = function(block) {
+    var varName = Blockly.Python.valueToCode(block, 'rotation', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "rotation = " + varName + "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_turn_left.py");
+    return code
+}
+
+Blockly.Python['turtle_turn_right'] = function(block) {
+    var varName = Blockly.Python.valueToCode(block, 'rotation', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "rotation = " + varName + "\n";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_turn_right.py");
+    return code
+}
+
+Blockly.Python['turtle_distance_middle'] = function(block) {
+
+    var varName = Blockly.Python.valueToCode(block, 'middledistance', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_distance_middle.py");
+    return code + varName + " = distance_middle\n"
+
+};
