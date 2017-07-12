@@ -142,8 +142,8 @@
                                 <li>
                                     <div id="pythondiv" style="color:#75A8D3; text-align:center" >
                                         <span>Python:</span>
-                                        <input id="python3" type="radio" value="3" name="group_py" checked />3
-                                        <input id="python2" type="radio" value="2" name="group_py" />2
+                                        <input id="python3" type="radio" value="3" name="group_py" />3
+                                        <input id="python2" type="radio" value="2" name="group_py" checked />2
                                     </div>
                                 </li>
 <!--                                 <li>
@@ -381,6 +381,7 @@
           <block type="wait"></block>
     </category>
     <sep></sep>
+    
     <category id="spider" name="Erle-Spider" colour="260">
           <block type="spider_standup_down"></block>
           <block type="spider_walk"></block>
@@ -408,8 +409,13 @@
           <block type="start_slam"></block>
           <block type="find_path"></block>
     </category>
+
     <category id="turtlebot" name="TurtlebotMove" colour="40">
           <block type="turtle_move_forwards"></block>
+          <block type="turtle_move_backwards"></block>
+          <block type="turtle_turn_left"></block>
+          <block type="turtle_turn_right"></block>
+          <block type="turtle_distance_middle"></block>
     </category>
 
 
