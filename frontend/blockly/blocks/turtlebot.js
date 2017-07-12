@@ -97,3 +97,27 @@ Blockly.Blocks['turtle_distance_middle'] = {
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
   }
 };
+
+Blockly.Blocks['turtle_distance_left'] = {
+  init: function() {
+    this.appendValueInput("leftdistance")
+        .appendField("Laser Distance Left");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(0);
+    this.setTooltip('this is the left distance value');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
+  }
+};
+
+Blockly.Blocks['turtle_distance_right'] = {
+  init: function() {
+    this.appendValueInput("rightdistance")
+        .appendField("Laser Distance Right");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(0);
+    this.setTooltip('this is the right distance value');
+    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
+  }
+};

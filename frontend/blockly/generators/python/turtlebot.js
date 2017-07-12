@@ -67,5 +67,22 @@ Blockly.Python['turtle_distance_middle'] = function(block) {
     var code = "";
     code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_distance_middle.py");
     return code + varName + " = distance_middle\n"
+};
 
+Blockly.Python['turtle_distance_left'] = function(block) {
+
+    var varName = Blockly.Python.valueToCode(block, 'leftdistance', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_distance_left.py");
+    return code + varName + " = distance_left\n"
+};
+
+Blockly.Python['turtle_distance_right'] = function(block) {
+
+    var varName = Blockly.Python.valueToCode(block, 'rightdistance', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "";
+    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_distance_right.py");
+    return code + varName + " = distance_right\n"
 };
