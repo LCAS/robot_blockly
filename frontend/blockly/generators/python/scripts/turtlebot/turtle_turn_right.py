@@ -5,13 +5,13 @@ from geometry_msgs.msg import Twist
 publisher = rospy.Publisher("/mobile_base/commands/velocity", Twist, queue_size=1)
 
 #maximum speed check!
-if vel > 2:
-    vel = 2
-elif vel < 0:
-    vel = 0
- 
+if rotation > 2:
+    rotation = 2
+elif rotation < 0:
+    rotation = 0
+
 t = Twist()
-t.linear.x = vel
+t.angular.z = -rotation
 publisher.publish(t)
 
 time.sleep(1)
