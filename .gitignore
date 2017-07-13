@@ -2,13 +2,5 @@
 scripts/test.py
 scripts/__pycache__/
 frontend/blockly/msg/js/*.js
-frontend/blockly/blockly_compressed.js
 frontend/blockly/blockly_uncompressed.js
-frontend/blockly/blocks_compressed.js
-frontend/blockly/dart_compressed.js
-frontend/blockly/javascript_compressed.js
-frontend/blockly/lua_compressed.js
 frontend/blockly/msg/json/en.json
-frontend/blockly/php_compressed.js
-frontend/blockly/python_compressed.js
-

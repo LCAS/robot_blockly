@@ -313,6 +313,7 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
         target.write("from robot_blockly.srv import SetCurrentBlockId\n")
         target.write("\n")
         target.write("rospy.init_node('blockly_node', anonymous=True)\n")
+        target.write("from geometry_msgs.msg import Twist\n")
         target.write("publisher = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=1)\n")
         target.write("rospy.sleep(0.5)\n")
         target.write("ros_initial_nodes = rosnode.get_node_names()\n")
