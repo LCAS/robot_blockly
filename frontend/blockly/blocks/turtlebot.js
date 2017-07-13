@@ -42,7 +42,7 @@ Blockly.Blocks['turtle_move_forwards'] = {
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(0);
-        this.setTooltip('move forwards with this speed');
+        this.setTooltip('move forwards with this speed, and go');
         this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
     }
 };
