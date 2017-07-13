@@ -228,7 +228,7 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
                             msg = Joy()
                             msg.header.stamp = rospy.Time.now()
                             rate = rospy.Rate(10)
-                               
+
                             valueAxe = 0.0
                             valueButton = 0
                             for i in range (0, 20):
@@ -251,7 +251,7 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
                             rate.sleep()
 
                         elif robot.startswith('rover'):
-                            direction = robot.split('rover_')[1]   
+                            direction = robot.split('rover_')[1]
                             rospy.wait_for_service('/mavros/set_mode')
                             change_mode = rospy.ServiceProxy('/mavros/set_mode', SetMode)
                             resp1 = change_mode(custom_mode='manual')
@@ -313,6 +313,8 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
         target.write("from robot_blockly.srv import SetCurrentBlockId\n")
         target.write("\n")
         target.write("rospy.init_node('blockly_node', anonymous=True)\n")
+        target.write("publisher = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=1)\n")
+        target.write("rospy.sleep(0.5)\n")
         target.write("ros_initial_nodes = rosnode.get_node_names()\n")
         target.write("\n")
         target.write("def check_status(block_id):\n")
@@ -409,7 +411,7 @@ def euler_from_quaternion(quaternion, axes='sxyz'):
     return euler_from_matrix(quaternion_matrix(quaternion), axes)''')
         target.write("\n")
         target.write("\n")
-        
+
         # Write the code that comes from blockly
         target.write(blockly_code+"\n")
         # target.write("rospy.spin()\n")
