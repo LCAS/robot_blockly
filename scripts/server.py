@@ -140,11 +140,11 @@ if __name__ == '__main__':
         import trollius as asyncio
 
     # factory = WebSocketServerFactory(u"ws://127.0.0.1:9000", debug=False)
-    factory = WebSocketServerFactory(u"ws://0.0.0.0:9000")
+    factory = WebSocketServerFactory(u"ws://0.0.0.0:9011")
     factory.protocol = MyServerProtocol
 
     loop = asyncio.get_event_loop()
-    coro = loop.create_server(factory, '0.0.0.0', 9000)
+    coro = loop.create_server(factory, '0.0.0.0', 9011)
     server = loop.run_until_complete(coro)
 
     try:

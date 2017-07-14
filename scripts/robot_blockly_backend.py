@@ -476,11 +476,11 @@ class RobotBlocklyBackend(object):
         rospy.Service('program_completed', Empty, RobotBlocklyBackend.__set_status_completed)
         rospy.Service('program_set_current_block_id', SetCurrentBlockId, self.__set_current_block_id)
 
-        factory = WebSocketServerFactory(u"ws://0.0.0.0:9000")
+        factory = WebSocketServerFactory(u"ws://0.0.0.0:9011")
         factory.protocol = BlocklyServerProtocol
 
         loop = asyncio.get_event_loop()
-        coro = loop.create_server(factory, '0.0.0.0', 9000)
+        coro = loop.create_server(factory, '0.0.0.0', 9011)
         server = loop.run_until_complete(coro)
         asyncio.async(RobotBlocklyBackend.wait_until_ros_node_shutdown(loop))
 

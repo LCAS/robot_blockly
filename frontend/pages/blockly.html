@@ -33,11 +33,28 @@
     <![endif]-->
 
     <!-- Include Blocky -->
-    <script src="../blockly/blockly_compressed.js"></script>
-    <script src="../blockly/blocks_compressed.js"></script>
+    <script src="../blockly/blockly_uncompressed.js"></script>
+
+    <script src="../blockly/blocks/logic.js"></script>
+    <script src="../blockly/blocks/loops.js"></script>
+    <script src="../blockly/blocks/math.js"></script>
+    <script src="../blockly/blocks/text.js"></script>
+    <script src="../blockly/blocks/lists.js"></script>
+    <script src="../blockly/blocks/colour.js"></script>
+    <script src="../blockly/blocks/variables.js"></script>
+    <script src="../blockly/blocks/procedures.js"></script>
+    <script src="../blockly/blocks/turtlebot.js"></script>
+    <script src="../blockly/blocks/pnp.js"></script>
+
     <script src="../blockly/javascript_compressed.js"></script>
     <script src="../blockly/python_compressed.js"></script>
     <script src="../blockly/php_compressed.js"></script>
+
+
+    <script src="../blockly/generators/pnp.js"></script>
+    <script src="../blockly/generators/pnp/pnp.js"></script>
+    <script src="../blockly/generators/pnp/text.js"></script>
+
     <script src="../blockly/msg/js/en.js"></script>
 
     <!-- Ace editor -->
@@ -141,7 +158,7 @@
                                     <a id="clean_ws_button" name="clean_ws_button" href="#" onclick='ExecutionLogicModule.clean_ws();'>Clean workspace</a>
                                 </li>
                                 <li>
-                                    <div id="pythondiv" style="color:#75A8D3; text-align:center" >
+                                    <div hidden id="pythondiv" style="color:#75A8D3; text-align:center" >
                                         <span>Python:</span>
                                         <input id="python3" type="radio" value="3" name="group_py" />3
                                         <input id="python2" type="radio" value="2" name="group_py" checked />2
@@ -424,6 +441,11 @@
     </category>
 
 
+    <category id="pnp" name="PNP" colour="40">
+          <block type="pnp_goto"></block>
+          <block type="pnp_say"></block>
+          <block type="text"></block>
+    </category>
     </xml>
 
 
@@ -514,8 +536,8 @@
   };
 
   function topython(){
-      Blockly.Python.addReservedWords('code');
-      var code = Blockly.Python.workspaceToCode(workspace);
+      Blockly.PNP.addReservedWords('code');
+      var code = Blockly.PNP.workspaceToCode(workspace);
       try {
         //eval(code);
         alert(code);
@@ -532,8 +554,8 @@
       window.dispatchEvent(new Event('resize'));
 
       // show the code
-      Blockly.Python.addReservedWords('code');
-      var code = Blockly.Python.workspaceToCode(workspace);
+      Blockly.PNP.addReservedWords('code');
+      var code = Blockly.PNP.workspaceToCode(workspace);
       // // the old way of placing the code, this required a textarea
       // document.getElementById("editor").innerHTML = code;
 

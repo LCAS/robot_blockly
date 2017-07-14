@@ -24,29 +24,42 @@
 */
 'use strict';
 
-goog.provide('Blockly.Blocks.turtlebot');
+goog.provide('Blockly.Blocks.pnp');
 goog.require('Blockly.Blocks');
 
 
 /**
  * Common HSV hue for all blocks in this category.
  */
-Blockly.Blocks.turtlebot.HUE = 260;
+Blockly.Blocks.pnp.HUE = 260;
 
 
-Blockly.Blocks['turtle_move_forwards'] = {
+function pnpblock_action_string(obj, name) {
+    obj.appendValueInput("param")
+        .appendField(name);
+    obj.setInputsInline(true);
+    obj.setPreviousStatement(true);
+    obj.setNextStatement(true);
+    obj.setColour(0);
+}
+
+
+Blockly.Blocks['pnp_goto'] = {
     init: function() {
-        this.appendValueInput("velocity")
-            .appendField("Forward Speed");
-        this.setInputsInline(true);
-        this.setPreviousStatement(true);
-        this.setNextStatement(true);
-        this.setColour(0);
-        this.setTooltip('move forwards with this speed, and go');
-        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+        pnpblock_action_string(this, 'goto');
     }
 };
 
+Blockly.Blocks['pnp_say'] = {
+    init: function() {
+        pnpblock_action_string(this, 'say');
+    }
+};
+
+
+
+
+/*
 Blockly.Blocks['turtle_move_backwards'] = {
     init: function() {
         this.appendValueInput("velocity")
@@ -121,3 +134,4 @@ Blockly.Blocks['turtle_distance_right'] = {
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
   }
 };
+*/
