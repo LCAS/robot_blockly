@@ -37,7 +37,7 @@ import os
 import threading
 import signal
 
-from subprocess import Popen
+from subprocess import Popen, call
 from autobahn.asyncio.websocket import WebSocketServerProtocol, \
     WebSocketServerFactory
 
@@ -145,7 +145,7 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
                     if method_name.startswith('play'):
                         CodeStatus.set_current_status(CodeStatus.RUNNING)
                         BlocklyServerProtocol.build_plan_code(method_body)
-
+                        call(['pnpgen_translator', 'inline', 'test.plan'])
                         # if method_name == 'play2':
                         #     CodeExecution.run_process(['python', 'test.py'])
                         # elif method_name == 'play3':
