@@ -27,10 +27,18 @@
 goog.provide('Blockly.PNP.pnp');
 goog.require('Blockly.PNP');
 
+// < persondetected? approach_person :
+//  (not persondetected)? say_comehere >;
+
 
 function pnpgen_action_string(name, block) {
-    var varName = Blockly.PNP.valueToCode(block, 'param', 0);
-    var code = name + "_" + varName + ";\n";
+    var param = Blockly.PNP.valueToCode(block, 'param', 0);
+    console.log(param);
+    var code = name;
+    if (param) {
+    		code = code + "_" + param;	
+    }
+    var code = code + ";\n";
     //code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_move_forwards.py");
     return code;
 }
@@ -39,6 +47,33 @@ Blockly.PNP['pnp_goto'] = function(block) {
     return pnpgen_action_string('goto', block);
 }
 
+Blockly.PNP['pnp_action'] = function(block) {
+	  var actName = block.getFieldValue('action');
+	  console.log(actName);
+    return pnpgen_action_string(actName, block);
+}
+
+Blockly.PNP['pnp_condition'] = function(block) {
+	  var condName = block.getFieldValue('condition');
+    return [condName, 0];
+}
+
 Blockly.PNP['pnp_say'] = function(block) {
     return pnpgen_action_string('say', block);
 }
+
+Blockly.PNP['pnp_controls_if'] = function(block) {
+  // If/elseif/else condition.
+  var n = 0;
+  var argument = Blockly.PNP.valueToCode(block, 'IF' + n,
+      Blockly.PNP.ORDER_NONE) || '';
+  var branch = Blockly.PNP.statementToCode(block, 'DO' + n) ||
+      Blockly.PNP.PASS;
+  var code = '< ' + argument + '?' + branch;
+  if (block.elseCount_) {
+    branch = Blockly.PNP.statementToCode(block, 'ELSE') ||
+        Blockly.PNP.PASS;
+    code += ': (' + argument + ')?' + branch;
+  }
+  return code + " >;";
+};
