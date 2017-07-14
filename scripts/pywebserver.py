@@ -1,13 +1,14 @@
 #!/usr/bin/env python
-import SimpleHTTPServer #http.server
+import SimpleHTTPServer  # http.server
 import SocketServer
 import socket
 import os
-from rospkg import RosPack
-
-rp = RosPack()
-frontend_path = rp.get_path('robot_blockly')
-frontend_path += '/frontend'
+frontend_path = os.path.realpath(
+    os.path.join(
+        os.path.dirname(__file__),
+        '../frontend'
+    )
+)
 
 print("Changing serve path to: " + frontend_path)
 
@@ -15,11 +16,16 @@ os.chdir(frontend_path)
 
 HOST = socket.gethostname()
 PORT = 1036
-address = ("",PORT)
+address = ("", PORT)
 
 Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
 
 httpd = SocketServer.TCPServer(address, Handler)
 
 print("serving at port", PORT)
-httpd.serve_forever()
+
+try:
+    httpd.serve_forever()
+except KeyboardInterrupt:
+    httpd.shutdown()
+
