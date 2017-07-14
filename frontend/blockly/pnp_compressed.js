@@ -4,7 +4,9 @@
 
 // Copyright 2012 Google Inc.  Apache License 2.0
 Blockly.PNP=new Blockly.Generator("PNP");Blockly.PNP.addReservedWords("and,as,assert,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while,with,yield,True,False,None,NotImplemented,Ellipsis,__debug__,quit,exit,copyright,license,credits,abs,divmod,input,open,staticmethod,all,enumerate,int,ord,str,any,eval,isinstance,pow,sum,basestring,execfile,issubclass,print,super,bin,file,iter,property,tuple,bool,filter,len,range,type,bytearray,float,list,raw_input,unichr,callable,format,locals,reduce,unicode,chr,frozenset,long,reload,vars,classmethod,getattr,map,repr,xrange,cmp,globals,max,reversed,zip,compile,hasattr,memoryview,round,__import__,complex,hash,min,set,apply,delattr,help,next,setattr,buffer,dict,hex,object,slice,coerce,dir,id,oct,sorted,intern");
-Blockly.PNP.init=function(a){};Blockly.PNP.finish=function(a){return a};Blockly.PNP.scrubNakedValue=function(a){return a+"\n"};Blockly.PNP.quote_=function(a){a=a.replace(/\\/g,"\\\\").replace(/\n/g,"\\\n").replace(/\%/g,"\\%").replace(/'/g,"\\'");return"'"+a+"'"};/*
+Blockly.PNP.init=function(a){};Blockly.PNP.finish=function(a){return a};Blockly.PNP.scrubNakedValue=function(a){return a+"\n"};Blockly.PNP.scrub_=function(a,c){var b=a.nextConnection&&a.nextConnection.targetBlock(),b=Blockly.PNP.blockToCode(b);return c+b};Blockly.PNP.quote_=function(a){a=a.replace(/\\/g,"\\\\").replace(/\n/g,"\\\n").replace(/\%/g,"\\%").replace(/'/g,"\\'");return""+a+""};Blockly.PNP.ORDER_ATOMIC=0;Blockly.PNP.ORDER_COLLECTION=1;Blockly.PNP.ORDER_STRING_CONVERSION=1;
+Blockly.PNP.ORDER_MEMBER=2;Blockly.PNP.ORDER_FUNCTION_CALL=2;Blockly.PNP.ORDER_EXPONENTIATION=3;Blockly.PNP.ORDER_UNARY_SIGN=4;Blockly.PNP.ORDER_BITWISE_NOT=4;Blockly.PNP.ORDER_MULTIPLICATIVE=5;Blockly.PNP.ORDER_ADDITIVE=6;Blockly.PNP.ORDER_BITWISE_SHIFT=7;Blockly.PNP.ORDER_BITWISE_AND=8;Blockly.PNP.ORDER_BITWISE_XOR=9;Blockly.PNP.ORDER_BITWISE_OR=10;Blockly.PNP.ORDER_RELATIONAL=11;Blockly.PNP.ORDER_LOGICAL_NOT=12;Blockly.PNP.ORDER_LOGICAL_AND=13;Blockly.PNP.ORDER_LOGICAL_OR=14;
+Blockly.PNP.ORDER_CONDITIONAL=15;Blockly.PNP.ORDER_LAMBDA=16;Blockly.PNP.ORDER_NONE=99;/*
 
 
  Copyright 2015 Erle Robotics
@@ -22,4 +24,4 @@ Blockly.PNP.init=function(a){};Blockly.PNP.finish=function(a){return a};Blockly.
  See the License for the specific language governing permissions and
  limitations under the License.
 */
-Blockly.PNP.pnp={};Blockly.PNP.pnp_goto=function(a){return"destination = "+Blockly.PNP.valueToCode(a,"destination",0)+"\nplan_step = 'goto_' + destination\n"};
+Blockly.PNP.pnp={};function pnpgen_action_string(a,c){var b=Blockly.PNP.valueToCode(c,"param",0);return a+"_"+b+";\n"}Blockly.PNP.pnp_goto=function(a){return pnpgen_action_string("goto",a)};Blockly.PNP.pnp_say=function(a){return pnpgen_action_string("say",a)};Blockly.PNP.texts={};Blockly.PNP.text=function(a){return[Blockly.PNP.quote_(a.getFieldValue("TEXT")),Blockly.PNP.ORDER_ATOMIC]};

@@ -203,19 +203,11 @@ var ExecutionLogicModule = (function () {
       switch (current_status) {
         case CODE_STATUS.COMPLETED:
           message_data = 'play'+python_version+'\n'; //play2 or play3
-          Blockly.Python.addReservedWords('code');
-          var saved_statement_prefix = Blockly.Python.STATEMENT_PREFIX;
           try {
-            Blockly.Python.STATEMENT_PREFIX = 'check_status(%1)\n';
-            var code = Blockly.Python.workspaceToCode(workspace);
-            if (0 == code.length) {
-              code = 'pass\n'
-            }
-            message_data += '\ntry:\n' + Blockly.Python.prefixLines(code, Blockly.Python.INDENT) + '\nfinally:\n' +
-              Blockly.Python.INDENT + 'send_status_completed()\n';
+            var code = Blockly.PNP.workspaceToCode(workspace);
+            message_data += code;
           }
           finally {
-            Blockly.Python.STATEMENT_PREFIX = saved_statement_prefix;
           }
           set_current_status(CODE_STATUS.RUNNING);
           break;
@@ -237,7 +229,7 @@ var ExecutionLogicModule = (function () {
 
       if (message_data.length > 0) {
         socket.send(message_data);
-        console.log("Text message sent.");
+        console.log("Text message sent: " + message_data);
       }
     },
 
