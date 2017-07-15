@@ -54,6 +54,7 @@
     <script src="../blockly/generators/pnp.js"></script>
     <script src="../blockly/generators/pnp/pnp.js"></script>
     <script src="../blockly/generators/pnp/text.js"></script>
+    <script src="../blockly/generators/pnp/lists.js"></script>
 
     <script src="../blockly/msg/js/en.js"></script>
 
@@ -260,6 +261,7 @@
     <div id="blocklyDiv" style="position: absolute"></div>
 
     <xml id="toolbox" style="display: none">
+<!--
     <category id="catLogic" name="Logic">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
@@ -400,6 +402,7 @@
     <category id="control" name="Control">
           <block type="wait"></block>
     </category>
+    -->
     <sep></sep>
     <!--
     <category id="spider" name="Erle-Spider" colour="260">
@@ -429,7 +432,6 @@
           <block type="start_slam"></block>
           <block type="find_path"></block>
     </category>
-    -->
     <category id="turtlebot" name="TurtlebotMove" colour="40">
           <block type="turtle_move_forwards"></block>
           <block type="turtle_move_backwards"></block>
@@ -439,15 +441,27 @@
           <block type="turtle_distance_left"></block>
           <block type="turtle_distance_right"></block>
     </category>
+    -->
 
 
     <category id="pnp" name="PNP" colour="40">
-          <block type="pnp_controls_if"></block>
+          <block type="pnp_controls_if">
+            <mutation elseif="1" else="0"></mutation>
+          </block>
+
           <block type="pnp_action"></block>
+          <block type="pnp_er"></block>
+          <block type="pnp_comment"></block>
           <block type="pnp_condition"></block>
-          <block type="pnp_goto"></block>
-          <block type="pnp_say"></block>
+          <!--<block type="pnp_goto"></block>
+          <block type="pnp_say"></block>-->
           <block type="text"></block>
+          <block type="lists_create_with">
+            <mutation items="1"></mutation>
+          </block>
+          <block type="lists_create_with">
+            <mutation items="2"></mutation>
+          </block>
     </category>
     </xml>
 

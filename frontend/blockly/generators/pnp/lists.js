@@ -19,30 +19,29 @@
  */
 
 /**
- * @fileoverview Generating PNP for logic blocks.
+ * @fileoverview Generating PNP for list blocks.
  * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
-goog.provide('Blockly.PNP.logic');
+goog.provide('Blockly.PNP.lists');
 
 goog.require('Blockly.PNP');
 
 
+Blockly.PNP['lists_create_empty'] = function(block) {
+  // Create an empty list.
+  return ['', Blockly.PNP.ORDER_ATOMIC];
+};
 
-// Blockly.PNP['pnp_controls_if'] = function(block) {
-//   // If/elseif/else condition.
-//   var n = 0;
-//   var argument = Blockly.PNP.valueToCode(block, 'IF' + n,
-//       Blockly.PNP.ORDER_NONE) || '';
-//   var branch = Blockly.PNP.statementToCode(block, 'DO' + n) ||
-//       Blockly.PNP.PASS;
-//   var code = '< ' + argument + '?' + branch;
-//   if (block.elseCount_) {
-//     branch = Blockly.PNP.statementToCode(block, 'ELSE') ||
-//         Blockly.PNP.PASS;
-//     code += ': (' + argument + ')?' + branch;
-//   }
-//   return code;
-// };
+Blockly.PNP['lists_create_with'] = function(block) {
+  // Create a list with any number of elements of any type.
+  var code = new Array(block.itemCount_);
+  for (var n = 0; n < block.itemCount_; n++) {
+    code[n] = Blockly.PNP.valueToCode(block, 'ADD' + n,
+        Blockly.PNP.ORDER_NONE) || 'None';
+  }
+  code = code.join('_') ;
+  return [code, Blockly.PNP.ORDER_ATOMIC];
+};
 

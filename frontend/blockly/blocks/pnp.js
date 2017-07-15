@@ -67,11 +67,13 @@ Blockly.Blocks['pnp_condition'] = {
             .appendField("condition")
             .appendField(new Blockly.FieldTextInput('person_near'),
                      'condition');
+        this.appendValueInput("param")
+            .appendField("param");
         this.setOutput(true, 'Boolean');
         this.setInputsInline(true);
         this.setPreviousStatement(false);
         this.setNextStatement(false);
-        this.setColour(100);
+        this.setColour(10);
     }
 };
 
@@ -103,7 +105,7 @@ Blockly.Blocks['pnp_controls_if'] = {
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['controls_if_else']));
+    this.setMutator(new Blockly.Mutator(['controls_if_elseif']));
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
@@ -272,6 +274,26 @@ Blockly.Blocks['pnp_controls_if'] = {
   }
 };
 
+Blockly.Blocks['pnp_comment'] = {
+  init: function() {
+    this.setColour('#AAAAAA');
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput('comment'), 'comment')
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+  }
+};
+
+Blockly.Blocks['pnp_er'] = {
+  init: function() {
+    this.setColour(200);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput('ER'), 'er')
+    this.setOutput(true, 'String');
+    // Assign 'this' to a variable for use in the tooltip closure below.
+  }
+};
 
 
 
