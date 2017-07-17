@@ -76,19 +76,19 @@ Blockly.PNP['pnp_controls_if'] = function(block) {
       Blockly.PNP.ORDER_NONE) || '';
   var branch = Blockly.PNP.statementToCode(block, 'DO' + n) ||
       '';
-  var code = '\n<\n  ';
-  code += argument +  '?' + (branch) + ' ';
+  var code = '\n< ';
+  code += argument +  '?' + rstrip_sc(branch) + ' ';
   for (n = 1; n <= block.elseifCount_; n++) {
     argument = Blockly.PNP.valueToCode(block, 'IF' + n,
         Blockly.PNP.ORDER_NONE) || '';
     branch = Blockly.PNP.statementToCode(block, 'DO' + n) ||
         '';
-    code += '\n  ' + argument + '?' + (branch) + ' ';
+    code += '\n  : ' + argument + '?' + rstrip_sc(branch) + ' ';
   }
   if (block.elseCount_) {
     branch = Blockly.PNP.statementToCode(block, 'ELSE') ||
         '';
-    code += '\n  (NOT ' + argument + ')?' + (branch) + ' ';
+    code += '\n  : (NOT ' + argument + ')?' + rstrip_sc(branch) + ' ';
   }
   return rstrip_sc(code) + " \n>;\n";
 };

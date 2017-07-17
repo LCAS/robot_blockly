@@ -37,7 +37,7 @@ import os
 import threading
 import signal
 
-from subprocess import Popen, call
+from subprocess import Popen, check_output, CalledProcessError
 from autobahn.asyncio.websocket import WebSocketServerProtocol, \
     WebSocketServerFactory
 
@@ -145,7 +145,14 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
                     if method_name.startswith('play'):
                         CodeStatus.set_current_status(CodeStatus.RUNNING)
                         BlocklyServerProtocol.build_plan_code(method_body)
-                        call(['pnpgen_translator', 'inline', 'test.plan'])
+                        try:
+                            print "generate plan"
+                            print check_output(['pnpgen_translator', 'inline', 'test.plan'])   
+                            print "generated plan"
+                        except CalledProcessError as e:
+                            print "failed translating plan: %s" % str(e)
+                        except Exception as e:
+                            print "failed translating plan: %s" % str(e)
                         # if method_name == 'play2':
                         #     CodeExecution.run_process(['python', 'test.py'])
                         # elif method_name == 'play3':
