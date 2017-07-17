@@ -52,8 +52,8 @@ Blockly.Blocks['pnp_action'] = {
                      'action');
         this.appendValueInput("param")
             .appendField("param");
-        this.appendValueInput("ER")
-            .appendField("ER");
+        // this.appendValueInput("ER")
+        //     .appendField("ER");
         this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
@@ -287,14 +287,35 @@ Blockly.Blocks['pnp_comment'] = {
 
 Blockly.Blocks['pnp_er'] = {
   init: function() {
-    this.setColour(200);
+    this.setColour(30);
     this.appendDummyInput()
-        .appendField(new Blockly.FieldTextInput('ER'), 'er')
-    this.setOutput(true, 'String');
+        .appendField('ER');
+    this.appendValueInput('IF0')
+        .setCheck('Boolean')
+        .appendField('if');
+    this.appendDummyInput()
+        .appendField("during")
+        .appendField(new Blockly.FieldTextInput('goto'),
+                 'during');
+    // this.appendValueInput('DURING')
+    //     .appendField('*during*');
+    this.appendStatementInput('DO0')
+        .appendField('do');
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+
+
+    // this.appendDummyInput()
+    //     .appendField(new Blockly.FieldTextInput(''), 'if')
+    // this.appendDummyInput()
+    //     .appendField(new Blockly.FieldTextInput(''), 'during')
+    // this.appendDummyInput()
+    //     .appendField(new Blockly.FieldTextInput(''), 'during')
+    // this.setOutput(true, 'String');
     // Assign 'this' to a variable for use in the tooltip closure below.
   }
 };
-
+//*if* personhere *during* goto *do* say_hello; waitfor_not_personhere; restart_action
 
 
 /*
