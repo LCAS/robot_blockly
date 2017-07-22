@@ -93,11 +93,39 @@ class CodeExecution(object):
             print("######################\n")
 
 
+class ALSubscriber():
+
+    def on_event(self, data):
+        self.handler(data)
+
+    def __init__(self, memory_service, subscriber, handler):
+        self.memory_service = memory_service
+        self.handler = handler
+        try:
+            self.veply_sub = self.memory_service.subscriber(subscriber)
+            self.veply_sub.signal.connect(self.on_event)
+        except RuntimeError:
+            print("Cannot sign up to %s" %  subscriber)
+
+
 class BlocklyServerProtocol(WebSocketServerProtocol):
 
     __current_code_status_subscriber = None
     __current_block_id_subscriber = None
     __current_block_publisher = None
+
+    def __init__(self):
+        global memory_service
+        self.memory_service = memory_service
+
+        if self.memory_service:
+            print "using Qi memory service"
+            self.als_action = ALSubscriber(self.memory_service,
+                                           'PNP/CurrentAction',
+                                           lambda d:
+                                           self._send_current_block_id(d))
+
+        super(BlocklyServerProtocol, self).__init__()
 
     def _send_code_status(self, message):
         print 'Current code status: %s' % message.data
@@ -275,7 +303,38 @@ class RobotBlocklyBackend(object):
         loop.run_until_complete(server.wait_closed())
         loop.close()
 
+def qi_init():
+    import qi
+    global memory_service
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--pip", type=str, default=os.environ['PEPPER_IP'],
+                        help="Robot IP address.  On robot or Local Naoqi: use '127.0.0.1'.")
+    parser.add_argument("--pport", type=int, default=9559,
+                        help="Naoqi port number")
+    args = parser.parse_args()
+    pip = args.pip
+    pport = args.pport
+
+    #Starting application
+    try:
+        connection_url = "tcp://" + pip + ":" + str(pport)
+        print "Connecting to ", connection_url
+        app = qi.Application(["SPQReLUI", "--qi-url=" + connection_url])
+    except RuntimeError:
+        print ("Can't connect to Naoqi at ip \"" +
+               pip + "\" on port " + str(pport) + ".\n"
+               "Please check your script arguments. Run with -h option for help.")
+        sys.exit(1)
+
+    app.start()
+    session = app.session
+    memory_service = session.service("ALMemory")
+    return session
+
+
 
 if __name__ == '__main__':
+    memory_service = None
+    session = qi_init()
     backend = RobotBlocklyBackend()
     backend.talker()
