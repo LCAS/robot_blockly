@@ -19,11 +19,11 @@ var ExecutionLogicModule = (function () {
     var launch_button = document.getElementById(LAUNCH_BUTTON_ID);
     switch (current_status) {
       case CODE_STATUS.PAUSED:
-        launch_button.innerHTML = "Resume";
+        launch_button.innerHTML = "";
         break;
 
       case CODE_STATUS.RUNNING:
-        launch_button.innerHTML = "Pause";
+        launch_button.innerHTML = "";
         break;
 
       case CODE_STATUS.COMPLETED:
@@ -54,7 +54,7 @@ var ExecutionLogicModule = (function () {
     switch (current_status) {
       case CODE_STATUS.PAUSED:
       case CODE_STATUS.RUNNING:
-        workspace.options.readOnly = true;
+        workspace.options.readOnly = false;
         if (null != workspace.toolbox_) {
           workspace.toolbox_.HtmlDiv.hidden = true;
         }
@@ -300,7 +300,7 @@ var ExecutionLogicModule = (function () {
           console.log("Connection not opened.");
           return;
       }
-      launch_button.firstChild.data = "EXECUTION CANCELED";
+      launch_button.innerHtml = "EXECUTION CANCELED";
       launch_button.onclick = null;
       
       end_button.style.display = "none";
@@ -318,7 +318,7 @@ var ExecutionLogicModule = (function () {
 
     manual_control: function(robot){
 
-        workspace.options.readOnly = true;
+        workspace.options.readOnly = false;
 
         var blocks_tab_selector = "a[href='#home'][data-toggle='tab']";
         var python_tab_selector = "a[href='#profile'][data-toggle='tab']";

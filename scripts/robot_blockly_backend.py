@@ -99,6 +99,9 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
     __current_block_id_subscriber = None
     __current_block_publisher = None
 
+    __plan_dir = os.path.realpath(os.getenv("PLAN_DIR", default=os.getcwd()))
+    __plan_name = 'blockly_plan'
+
     def _send_code_status(self, message):
         print 'Current code status: %s' % message.data
         payload = 'status_update\n'
@@ -143,30 +146,12 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
                 if len(message_data) > 1:
                     method_body = message_data[1]
                     if method_name.startswith('play'):
-                        CodeStatus.set_current_status(CodeStatus.RUNNING)
-                        BlocklyServerProtocol.build_plan_code(method_body)
-                        try:
-                            print "generate plan"
-                            print check_output(['pnpgen_translator', 'inline', 'test.plan'])   
-                            print "generated plan"
-                        except CalledProcessError as e:
-                            print "failed translating plan: %s" % str(e)
-                        except Exception as e:
-                            print "failed translating plan: %s" % str(e)
-                        # if method_name == 'play2':
-                        #     CodeExecution.run_process(['python', 'test.py'])
-                        # elif method_name == 'play3':
-                        #     CodeExecution.run_process(['python3', 'test.py'])
+                        CodeStatus.set_current_status(CodeStatus.COMPLETED)
+                        self._play(method_body)
                     else:
                         print 'Called unknown method %s' % method_name
                 else:
-                    if 'pause' == method_name:
-                        print('execution paused')
-                        CodeStatus.set_current_status(CodeStatus.PAUSED)
-                    elif 'resume' == method_name:
-                        print('execution resumed')
-                        CodeStatus.set_current_status(CodeStatus.RUNNING)
-                    elif 'end' == method_name:
+                    if 'end' == method_name:
                         print('execution ended')
                         CodeStatus.set_current_status(CodeStatus.COMPLETED)
                     else:
@@ -175,32 +160,14 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
     def onClose(self, wasClean, code, reason):
         print("WebSocket connection closed: {0}".format(reason))
 
-    @staticmethod
-    def build_python_code(blockly_code):
-        print("building the python code...")
-        filename = "test.py"
-        target = open(filename, 'w')
-        target.truncate()  # empties the file
+    def _play(self, blockly_code):
+        self._build_plan_code(blockly_code)
+        self._transplate_plan()
+        self._start_plan()
 
-        target.write("#!/usr/bin/env python\n")
-        target.write('''
-import naoqi
-import math
-
-plan = """
-''')
-        # Write the code that comes from blockly
-        target.write(blockly_code + "\n")
-        target.write('''
-"""
-''')
-        target.close()
-        ###########################
-
-    @staticmethod
-    def build_plan_code(blockly_code):
-        print("building the plan...")
-        filename = "test.plan"
+    def _build_plan_code(self, blockly_code):
+        filename = os.path.join(self.__plan_dir, self.__plan_name) + '.plan'
+        print("building the plan... in %s" % filename)
         target = open(filename, 'w')
         target.truncate()  # empties the file
 
@@ -208,7 +175,30 @@ plan = """
         # Write the code that comes from blockly
         target.write(blockly_code)
         target.close()
-        ###########################
+
+    def _transplate_plan(self):
+        try:
+            print "translate plan in %s" % self.__plan_dir
+            print check_output(
+                ['pnpgen_translator',
+                 'inline', self.__plan_name + '.plan'],
+                cwd=self.__plan_dir
+            )
+            print "translated plan"
+        except Exception as e:
+            print "failed translating plan: %s" % str(e)
+
+    def _start_plan(self):
+        try:
+            print "start plan in %s" % self.__plan_dir
+            print check_output(
+                ['./run_plan.py',
+                 '--plan', self.__plan_name],
+                cwd=self.__plan_dir
+            )
+            print "started plan"
+        except Exception as e:
+            print "failed starting plan: %s" % str(e)
 
 
 class RobotBlocklyBackend(object):
