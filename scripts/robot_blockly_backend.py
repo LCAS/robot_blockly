@@ -153,6 +153,7 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
                 else:
                     if 'end' == method_name:
                         print('execution ended')
+                        self._start_plan(plan="stop")
                         CodeStatus.set_current_status(CodeStatus.COMPLETED)
                     else:
                         print('Called unknown method %s', method_name)
@@ -162,7 +163,7 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
 
     def _play(self, blockly_code):
         self._build_plan_code(blockly_code)
-        self._transplate_plan()
+        self._translate_plan()
         self._start_plan()
 
     def _build_plan_code(self, blockly_code):
@@ -176,7 +177,7 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
         target.write(blockly_code)
         target.close()
 
-    def _transplate_plan(self):
+    def _translate_plan(self):
         try:
             print "translate plan in %s" % self.__plan_dir
             print check_output(
@@ -188,12 +189,14 @@ class BlocklyServerProtocol(WebSocketServerProtocol):
         except Exception as e:
             print "failed translating plan: %s" % str(e)
 
-    def _start_plan(self):
+    def _start_plan(self, plan=None):
+        if plan is None:
+            plan = self.__plan_name
         try:
             print "start plan in %s" % self.__plan_dir
             print check_output(
                 ['./run_plan.py',
-                 '--plan', self.__plan_name],
+                 '--plan', plan],
                 cwd=self.__plan_dir
             )
             print "started plan"
