@@ -34,6 +34,67 @@ goog.require('Blockly.Blocks');
 Blockly.Blocks.pnp.HUE = 260;
 
 
+// generated actions with
+// ls -1 ../spqrel_tools/actions/*.py | cut -f4 -d/ | cut -f1 -d. | sed 's/^\(.*\)$/["\1", "\1"],/'
+
+Blockly.Blocks.pnp.known_pnp_actions = [
+    ["action_cmd", "action_cmd"],
+    ["asrenable", "asrenable"],
+    ["dialogue", "dialogue"],
+    ["dialoguestart", "dialoguestart"],
+    ["dialoguestop", "dialoguestop"],
+    ["dooropen", "dooropen"],
+    ["enter", "enter"],
+    ["execplan", "execplan"],
+    ["followuntil", "followuntil"],
+    ["goto", "goto"],
+    ["headpose", "headpose"],
+    ["init_actions", "init_actions"],
+    ["lookfor", "lookfor"],
+    ["memorizeface", "memorizeface"],
+    ["memorizepeople", "memorizepeople"],
+    ["movementdetected", "movementdetected"],
+    ["navigate_to", "navigate_to"],
+    ["obstaclehere", "obstaclehere"],
+    ["personbehind", "personbehind"],
+    ["persondetected", "persondetected"],
+    ["personhere", "personhere"],
+    ["personsitting", "personsitting"],
+    ["posture", "posture"],
+    ["saveposition", "saveposition"],
+    ["say", "say"],
+    ["screentouched", "screentouched"],
+    ["soundtrack", "soundtrack"],
+    ["speechbtn", "speechbtn"],
+    ["trackface", "trackface"],
+    ["turn", "turn"],
+    ["utils", "utils"],
+    ["vsay", "vsay"],
+    ["waitfor", "waitfor"],
+    ["wait", "wait"],
+    ["webpage", "webpage"]
+];
+
+//generated conditions with 
+// find ../spqrel_tools/ -name *.py | xargs -- grep 'set_condition(' ../spqrel_tools/actions/*.py | sed "s/.*set_condition.*,\(.*\),.*$/[\1, \1],/" | sort | uniq
+
+
+Blockly.Blocks.pnp.known_pnp_conditions = [
+    ['closetotarget', 'closetotarget'],
+    ['closeto', 'closeto'],
+    ['dooropen', 'dooropen'],
+    ['movementdetected', 'movementdetected'],
+    ['obstaclehere', 'obstaclehere'],
+    ['pathnotfound', 'pathnotfound'],
+    ['personbehind', 'personbehind'],
+    ['persondetected', 'persondetected'],
+    ['personhere', 'personhere'],
+    ['personsitting', 'personsitting'],
+    ['screentouched', 'screentouched'],
+    ['stopfollowing',  'stopfollowing']
+];
+
+
 function pnpblock_action_string(obj, name) {
     obj.appendValueInput("param")
         .appendField(name);
@@ -44,14 +105,19 @@ function pnpblock_action_string(obj, name) {
 }
 
 
-Blockly.Blocks['pnp_action'] = {
+Blockly.Blocks['pnp_free_action'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("action")
             .appendField(new Blockly.FieldTextInput('action'),
                      'action');
-        this.appendValueInput("param")
-            .appendField("param");
+        this.appendDummyInput()
+            .appendField("params")
+            .appendField(new Blockly.FieldTextInput(''),
+                     'param');
+
+        // this.appendValueInput("param")
+        //     .appendField("param");
         // this.appendValueInput("ER")
         //     .appendField("ER");
         this.setInputsInline(true);
@@ -61,14 +127,41 @@ Blockly.Blocks['pnp_action'] = {
     }
 };
 
-Blockly.Blocks['pnp_condition'] = {
+Blockly.Blocks['pnp_action'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("action")
+            .appendField(new Blockly.FieldDropdown(
+                  Blockly.Blocks.pnp.known_pnp_actions
+                ),
+                'action');
+        this.appendDummyInput()
+            .appendField("params")
+            .appendField(new Blockly.FieldTextInput(''),
+                     'param');
+
+        // this.appendValueInput("param")
+        //     .appendField("param");
+        // this.appendValueInput("ER")
+        //     .appendField("ER");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(100);
+    }
+};
+
+
+Blockly.Blocks['pnp_free_condition'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("condition")
             .appendField(new Blockly.FieldTextInput('person_near'),
                      'condition');
-        this.appendValueInput("param")
-            .appendField("param");
+        this.appendDummyInput()
+            .appendField("params")
+            .appendField(new Blockly.FieldTextInput(''),
+                     'param');
         this.setOutput(true, 'Boolean');
         this.setInputsInline(true);
         this.setPreviousStatement(false);
@@ -76,6 +169,28 @@ Blockly.Blocks['pnp_condition'] = {
         this.setColour(10);
     }
 };
+
+Blockly.Blocks['pnp_condition'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("condition")
+            .appendField(new Blockly.FieldDropdown(
+                  Blockly.Blocks.pnp.known_pnp_conditions
+                ),
+                'condition');
+        this.appendDummyInput()
+            .appendField("params")
+            .appendField(new Blockly.FieldTextInput(''),
+                     'param');
+        this.setOutput(true, 'Boolean');
+        this.setInputsInline(true);
+        this.setPreviousStatement(false);
+        this.setNextStatement(false);
+        this.setColour(10);
+    }
+};
+
+
 
 Blockly.Blocks['pnp_goto'] = {
     init: function() {
@@ -295,8 +410,10 @@ Blockly.Blocks['pnp_er'] = {
         .appendField('if');
     this.appendDummyInput()
         .appendField("during")
-        .appendField(new Blockly.FieldTextInput('goto'),
-                 'during');
+            .appendField(new Blockly.FieldDropdown(
+                  Blockly.Blocks.pnp.known_pnp_actions
+                ),
+                'during');
     // this.appendValueInput('DURING')
     //     .appendField('*during*');
     this.appendStatementInput('DO0')

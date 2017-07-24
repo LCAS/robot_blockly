@@ -35,7 +35,7 @@ function rstrip_sc(instr, chars) {
 }
 
 function pnpgen_action_string(name, block) {
-    var param = Blockly.PNP.valueToCode(block, 'param', 0);
+    var param = block.getFieldValue('param');
     var code = name;
     if (param) {
     		code = code + "_" + param;	
@@ -57,17 +57,24 @@ Blockly.PNP['pnp_condition'] = function(block) {
     return [pnpgen_action_string(condName, block), 0];
 }
 
+Blockly.PNP['pnp_er'] = function(block) {
+    console.log('ER');
+    var condition = Blockly.PNP.valueToCode(block, 'IF0',
+        Blockly.PNP.ORDER_NONE) || '';
+    var branch = Blockly.PNP.statementToCode(block, 'DO0') ||
+        '';
+    var during = block.getFieldValue('during');
+    var code = '\n'
+              + '*if* ' + condition 
+              + ' *during* ' + during
+              + ' *do* ' + branch;
+    return code;
+}
+
 Blockly.PNP['pnp_comment'] = function(block) {
     var c = block.getFieldValue('comment');
     return '# ' + c + '\n';
 }
-
-Blockly.PNP['pnp_er'] = function(block) {
-    var c = block.getFieldValue('er');
-    return [c, 0];
-}
-
-
 
 Blockly.PNP['pnp_controls_if'] = function(block) {
   // If/elseif/else condition.
