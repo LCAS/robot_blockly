@@ -112,6 +112,14 @@ var ExecutionLogicModule = (function () {
 
   function set_current_block_id(block_id) {
     if ([CODE_STATUS.RUNNING, CODE_STATUS.PAUSED].indexOf(current_status) >= 0) {
+      var allBlocks = workspace.getAllBlocks();
+
+      for (b in allBlocks) {
+        console.log(b);
+      }
+
+
+
       var selected_block = workspace.getBlockById(block_id);
       if (null != selected_block) {
         if (null != current_block) {
