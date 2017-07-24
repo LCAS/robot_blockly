@@ -94,7 +94,6 @@ Blockly.Blocks.pnp.known_pnp_conditions = [
     ['stopfollowing',  'stopfollowing']
 ];
 
-
 function pnpblock_action_string(obj, name) {
     obj.appendValueInput("param")
         .appendField(name);
@@ -402,7 +401,7 @@ Blockly.Blocks['pnp_comment'] = {
 
 Blockly.Blocks['pnp_er'] = {
   init: function() {
-    this.setColour(30);
+    this.setColour('#AAAAFF');
     this.appendDummyInput()
         .appendField('ER');
     this.appendValueInput('IF0')

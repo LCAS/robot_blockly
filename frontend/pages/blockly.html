@@ -11,7 +11,7 @@
     <!--<link href="http://erlerobotics.com/blog/wp-content/uploads/2015/04/favicon.png" rel="shortcut icon" type="image/x-icon">-->
     <!-- <link rel="icon" type="image/png" href="http://lincoln.ac.uk/favicon_16.png"> -->
 
-    <title>robot_blockly, program your ROS robots in a simple way</title>
+    <title>PNP-blockly, program your PNP plan in a simple way</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +66,17 @@
 <!--     <link rel="stylesheet" type="text/css" href="assets/css/ubuntu.css">
     <style>body { font-family: Ubuntu, sans-serif; }</style>
  -->
-
+    <style>    
+        .sidebar {
+            z-index: 1;
+            position: absolute;
+            width: 170px;
+            margin-top: 80px;
+        }
+        .navbar {
+            min-height: 80px;
+        }
+    </style>
 </head>
 
 <body onload="restorelocal()">
@@ -82,8 +92,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../index.html">robot_blockly</a>
-                <a class="" style="vertical-align: bottom;" href="http://www.ros.org">powered by ROS, brought to you by the University of Lincoln</a>
+                <a class="navbar-brand" href="../index.html"><img height="40px" src="img/spqrel.png" /></a>
+                <a class="" href="http://lncn.eu/spqrel">PNP-Blockly - powered by Blockly, and NaoQi, brought to you by the SPQReL Team.</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -450,18 +460,22 @@
           </block>
 
           <block type="pnp_action"></block>
+          <block type="pnp_free_action"></block>
+          <block type="pnp_condition"></block>
+          <block type="pnp_free_condition"></block>
           <block type="pnp_er"></block>
           <block type="pnp_comment"></block>
-          <block type="pnp_condition"></block>
+          <block type="logic_negate"></block>
+          <block type="logic_operation"></block>
           <!--<block type="pnp_goto"></block>
           <block type="pnp_say"></block>-->
-          <block type="text"></block>
+<!--           <block type="text"></block>
           <block type="lists_create_with">
             <mutation items="1"></mutation>
           </block>
           <block type="lists_create_with">
             <mutation items="2"></mutation>
-          </block>
+          </block> -->
     </category>
     </xml>
 

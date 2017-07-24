@@ -52,8 +52,20 @@ Blockly.PNP['pnp_action'] = function(block) {
     return code;
 }
 
+Blockly.PNP['pnp_free_action'] = function(block) {
+    var actName = block.getFieldValue('action');
+
+    var code = pnpgen_action_string(actName, block) + "; ";
+    return code;
+}
+
 Blockly.PNP['pnp_condition'] = function(block) {
 	  var condName = block.getFieldValue('condition');
+    return [pnpgen_action_string(condName, block), 0];
+}
+
+Blockly.PNP['pnp_free_condition'] = function(block) {
+    var condName = block.getFieldValue('condition');
     return [pnpgen_action_string(condName, block), 0];
 }
 
@@ -98,4 +110,37 @@ Blockly.PNP['pnp_controls_if'] = function(block) {
     code += '\n  : (NOT ' + argument + ')?' + rstrip_sc(branch) + ' ';
   }
   return rstrip_sc(code) + " \n>;\n";
+};
+
+Blockly.PNP['logic_negate'] = function(block) {
+  // Negation.
+  var argument0 = Blockly.PNP.valueToCode(block, 'BOOL',
+      Blockly.PNP.ORDER_LOGICAL_NOT) || '';
+  var code = '(not ' + argument0 + ')';
+  return [code, Blockly.PNP.ORDER_LOGICAL_NOT];
+};
+
+Blockly.PNP['logic_operation'] = function(block) {
+  // Operations 'and', 'or'.
+  var operator = (block.getFieldValue('OP') == 'AND') ? 'and' : 'or';
+  var order = (operator == 'and') ? Blockly.PNP.ORDER_LOGICAL_AND :
+      Blockly.PNP.ORDER_LOGICAL_OR;
+  var argument0 = Blockly.PNP.valueToCode(block, 'A', order);
+  var argument1 = Blockly.PNP.valueToCode(block, 'B', order);
+  if (!argument0 && !argument1) {
+    // If there are no arguments, then the return value is false.
+    argument0 = 'False';
+    argument1 = 'False';
+  } else {
+    // Single missing arguments have no effect on the return value.
+    var defaultArgument = (operator == 'and') ? 'True' : 'False';
+    if (!argument0) {
+      argument0 = defaultArgument;
+    }
+    if (!argument1) {
+      argument1 = defaultArgument;
+    }
+  }
+  var code = '(' + operator + ' ' + argument0 + ' ' + argument1 + ')';
+  return [code, order];
 };
