@@ -38,38 +38,47 @@ Blockly.Blocks.pnp.HUE = 260;
 // ls -1 ../spqrel_tools/actions/*.py | cut -f4 -d/ | cut -f1 -d. | sed 's/^\(.*\)$/["\1", "\1"],/'
 
 Blockly.Blocks.pnp.known_pnp_actions = [
+    ["analyseperson", "analyseperson"],
+    ["animation", "animation"],
+    ["approach", "approach"],
+    ["arm", "arm"],
     ["asrenable", "asrenable"],
+    ["assign", "assign"],
+    ["bow", "bow"],
+    ["continuebtn", "continuebtn"],
     ["dialogue", "dialogue"],
     ["dialoguestart", "dialoguestart"],
     ["dialoguestop", "dialoguestop"],
-    ["dooropen", "dooropen"],
     ["enter", "enter"],
     ["execplan", "execplan"],
+    ["fake", "fake"],
+    ["findperson", "findperson"],
     ["followuntil", "followuntil"],
+    ["gotopos", "gotopos"],
     ["goto", "goto"],
+    ["greet", "greet"],
+    ["headpitch", "headpitch"],
     ["headpose", "headpose"],
     ["lookfor", "lookfor"],
     ["memorizeface", "memorizeface"],
     ["memorizepeople", "memorizepeople"],
-    ["movementdetected", "movementdetected"],
     ["navigateto", "navigateto"],
     ["obstaclehere", "obstaclehere"],
-    ["personbehind", "personbehind"],
-    ["persondetected", "persondetected"],
-    ["personhere", "personhere"],
-    ["personsitting", "personsitting"],
+    ["peoplesummary", "peoplesummary"],
     ["posture", "posture"],
+    ["reccam", "reccam"],
+    ["recdata", "recdata"],
     ["saveposition", "saveposition"],
     ["say", "say"],
-    ["screentouched", "screentouched"],
     ["soundtrack", "soundtrack"],
     ["speechbtn", "speechbtn"],
+    ["storecentralperson", "storecentralperson"],
     ["trackface", "trackface"],
     ["turn", "turn"],
-    ["utils", "utils"],
     ["vsay", "vsay"],
     ["waitfor", "waitfor"],
     ["wait", "wait"],
+    ["wave", "wave"],
     ["webpage", "webpage"]
 ];
 
@@ -83,6 +92,7 @@ Blockly.Blocks.pnp.known_pnp_conditions = [
     ['dooropen', 'dooropen'],
     ['movementdetected', 'movementdetected'],
     ['obstaclehere', 'obstaclehere'],
+    ['personanalysed', 'personanalysed'],
     ['pathnotfound', 'pathnotfound'],
     ['personbehind', 'personbehind'],
     ['persondetected', 'persondetected'],
@@ -101,6 +111,43 @@ function pnpblock_action_string(obj, name) {
     obj.setColour(0);
 }
 
+
+Blockly.Blocks['pnp_start'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("START")
+
+        this.setInputsInline(true);
+        this.setPreviousStatement(false);
+        this.setNextStatement(true);
+        this.setColour(255);
+    }
+};
+
+Blockly.Blocks['pnp_free_action'] = {
+    init: function() {
+        this.appendDummyInput()
+            .appendField("action")
+            .appendField(new Blockly.FieldTextInput('action'),
+                     'action');
+        this.appendDummyInput()
+            .appendField("params")
+            .appendField(new Blockly.FieldTextInput(''),
+                     'param');
+        this.appendValueInput('ER')
+            .setCheck('Boolean')
+            .appendField('ER');
+
+        // this.appendValueInput("param")
+        //     .appendField("param");
+        // this.appendValueInput("ER")
+        //     .appendField("ER");
+        this.setInputsInline(true);
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(100);
+    }
+};
 
 Blockly.Blocks['pnp_free_action'] = {
     init: function() {
