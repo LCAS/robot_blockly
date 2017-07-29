@@ -112,11 +112,11 @@ function pnpblock_action_string(obj, name) {
 }
 
 
+Blockly.BlockSvg.START_HAT = true;
 Blockly.Blocks['pnp_start'] = {
     init: function() {
         this.appendDummyInput()
             .appendField("START")
-
         this.setInputsInline(true);
         this.setPreviousStatement(false);
         this.setNextStatement(true);

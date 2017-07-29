@@ -127,3 +127,43 @@ Blockly.PNP.ORDER_LOGICAL_OR = 14;       // or
 Blockly.PNP.ORDER_CONDITIONAL = 15;      // if else
 Blockly.PNP.ORDER_LAMBDA = 16;           // lambda
 Blockly.PNP.ORDER_NONE = 99;             // (...)
+
+
+
+
+Blockly.Generator.prototype.workspaceToCode = function(workspace) {
+  if (!workspace) {
+    // Backwards compatability from before there could be multiple workspaces.
+    console.warn('No workspace specified in workspaceToCode call.  Guessing.');
+    workspace = Blockly.getMainWorkspace();
+  }
+  var code = [];
+  this.init(workspace);
+  var blocks = workspace.getTopBlocks(true);
+
+  for (var x = 0, block; block = blocks[x]; x++) {
+    if (block.type == 'pnp_start') {
+      var line = this.blockToCode(block);
+      if (goog.isArray(line)) {
+        // Value blocks return tuples of code and operator order.
+        // Top-level blocks don't care about operator order.
+        line = line[0];
+      }
+      if (line) {
+        if (block.outputConnection && this.scrubNakedValue) {
+          // This block is a naked value.  Ask the language's code generator if
+          // it wants to append a semicolon, or something.
+          line = this.scrubNakedValue(line);
+        }
+        code.push(line);
+      }
+    }
+  }
+  code = code.join('\n');  // Blank line between each section.
+  code = this.finish(code);
+  // Final scrubbing of whitespace.
+  code = code.replace(/^\s+\n/, '');
+  code = code.replace(/\n\s+$/, '\n');
+  code = code.replace(/[ \t]+\n/g, '\n');
+  return code;
+};

@@ -45,6 +45,11 @@ function pnpgen_action_string(name, block) {
     return code;
 }
 
+Blockly.PNP['pnp_start'] = function(block) {
+    return '# START\n';
+}
+
+
 Blockly.PNP['pnp_action'] = function(block) {
 	  var actName = block.getFieldValue('action');
     var ER_code = Blockly.PNP.statementToCode(block, 'ER') ||
