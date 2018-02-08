@@ -9,6 +9,7 @@ echo ros | sudo -s -S -H -u turtlebot cp -v /home/computing/schools/src/robot_bl
 echo ros | sudo -s -S -H -u turtlebot chmod -v +x /home/turtlebot/Desktop/blockly_launch.sh
 
 #setup the autostart
+echo ros | sudo -s -S -H -u turtlebot mkdir -p /home/turtlebot/.config/autostart
 echo ros | sudo -s -S -H -u turtlebot cp -v /home/computing/schools/src/robot_blockly/turtlebot_blockly.desktop /home/turtlebot/.config/autostart/turtlebot_blockly.desktop
 
 echo "done..."
