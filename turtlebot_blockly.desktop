@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=bash /home/turtlebot/Desktop/blockly_launch.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_GB]=turtlebot_blockly
+Name=Turtlebot Blockly
+Comment[en_GB]=
+Comment=
