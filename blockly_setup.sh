@@ -5,10 +5,10 @@
 echo "setting up autolaunch for blockly on turtlebot..."
 
 #assuming installation has occured, copy setup script and change permission
-cp -v /home/computing/schools/src/robot_blockly/blockly_launch.sh /home/turtlebot/Desktop/blockly_launch.sh
-sudo chmod -v +x /home/turtlebot/Desktop/blockly_launch.sh
+echo ros | sudo -s -S -H -u turtlebot cp -v /home/computing/schools/src/robot_blockly/blockly_launch.sh /home/turtlebot/Desktop/blockly_launch.sh
+echo ros | sudo -s -S -H -u turtlebot chmod -v +x /home/turtlebot/Desktop/blockly_launch.sh
 
 #setup the autostart
-cp -v /home/computing/schools/src/robot_blockly/turtlebot_blockly.desktop /home/turtlebot/.config/autostart/turtlebot_blockly.desktop
+echo ros | sudo -s -S -H -u turtlebot cp -v /home/computing/schools/src/robot_blockly/turtlebot_blockly.desktop /home/turtlebot/.config/autostart/turtlebot_blockly.desktop
 
 echo "done..."
