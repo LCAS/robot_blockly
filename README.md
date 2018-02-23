@@ -1,5 +1,10 @@
 # robot_blockly
 
+### UoL Turtlebot installation and use
+
+See the [wiki](https://github.com/lcas/robot_blockly/wiki) for instructions.
+
+### Summary
 
 `robot_blockly` is a ROS package that provides web-based visualization and block programming tools for robots and drones.
 
@@ -18,7 +23,7 @@ git clone https://github.com/erlerobot/blockly.git
 cd ~/blockly_ws/
 catkin_make_isolated -j2 --pkg robot_blockly --install
 ```
-You can also try 
+You can also try
 ```
 mkdir -p ~/blockly_ws/src
 cd ~/blockly_ws/src
@@ -52,6 +57,5 @@ Unless specified, the rest of the code is freed under a GPLv3 License.
 
 # Robots where blockly has been implemented:
 - [Erle-Spider](http://erlerobotics.com/blog/product/erle-spider-the-ubuntu-drone-with-legs/)
-- [Erle-Rover](https://erlerobotics.com/blog/product/erle-rover/) 
+- [Erle-Rover](https://erlerobotics.com/blog/product/erle-rover/)
 - [Shadow Robot hands](http://www.shadowrobot.com/)
-
