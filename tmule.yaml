@@ -3,6 +3,8 @@ init_cmd: |
   date
   source /opt/ros/indigo/setup.bash
   export TURTLEBOT_3D_SENSOR=kinect
+  export ROS_HOSTNAME=`ip addr show dev wlan0 | grep "inet " | sed 's/.*inet \([0-9\.]*\).*/\1/'`
+  export ROS_IP=$ROS_HOSTNAME
 windows:
   - name: turtlebot
     panes:
