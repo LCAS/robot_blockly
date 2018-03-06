@@ -1,6 +1,6 @@
 #!/bin/bash
 # script to setup files etc for blockly on turtlebot
-# P. Baxter, L-CAS, UoL, 02/2018
+# M. Hanheide (new), P. Baxter (old), L-CAS, UoL, 02/2018
 
 ### OLD way
 
@@ -14,8 +14,10 @@
 #echo ros | sudo -s -S -H -u turtlebot mkdir -p /home/turtlebot/.config/autostart
 #echo ros | sudo -s -S -H -u turtlebot cp -v /home/computing/schools/src/robot_blockly/turtlebot_blockly.desktop /home/turtlebot/.config/autostart/turtlebot_blockly.desktop
 
+### NEW way
+
 sudo apt-get update
-sudo apt-get install supervisor tmux
+sudo apt-get install supervisor tmux nmap
 sudo pip2 install -U tmule 
 
 cp -v tmule.yaml $HOME
