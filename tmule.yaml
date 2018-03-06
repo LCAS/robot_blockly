@@ -1,0 +1,15 @@
+init_cmd: |
+  export TMULE=1
+  date
+  source /opt/ros/indigo/setup.bash
+  export TURTLEBOT_3D_SENSOR=kinect
+windows:
+  - name: turtlebot
+    panes:
+    - roslaunch uol_turtlebot_common turtlebot.launch
+  - name: blockly
+    panes:
+    - source /home/computing/schools/devel/setup.bash; roslaunch robot_blockly robot_blockly.launch
+  - name: bumper_reset
+    panes:
+    - rosservice call /reset_bumper_stop
