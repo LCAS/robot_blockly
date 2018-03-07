@@ -39,6 +39,7 @@ echo "setup for networking..."
 sudo apt-get -y install wicd-curses wicd-gtk wicd-daemon
 sudo apt-get -y purge network-manager
 
+sudo /etc/init.d/wicd start
 gnome-terminal -e 'bash -c "wicd-curses"' &
 
 echo "...done"
