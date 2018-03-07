@@ -17,7 +17,7 @@ echo "setting up autolaunch of tmule on turtlebot..."
 ### NEW way
 
 sudo apt-get update
-sudo apt-get install supervisor tmux nmap
+sudo apt-get -y install supervisor tmux nmap
 sudo pip2 install -U tmule
 
 cp -v tmule.yaml $HOME
@@ -31,4 +31,14 @@ crontab iptracker.cron
 
 ./iptracker.sh
 
-echo "done..."
+### Setup for new network method, launching new terminal for wicd-curses in process
+
+echo "setup for networking..."
+
+# allow users 'turtlebot' and 'computing' to have access
+sudo apt-get -y install wicd-curses wicd-gtk wicd-daemon
+sudo apt-get purge network-manager
+
+gnome-terminal -e 'bash -c "wicd-curses"' &
+
+echo "...done"
