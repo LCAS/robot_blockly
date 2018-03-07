@@ -37,7 +37,7 @@ echo "setup for networking..."
 
 # allow users 'turtlebot' and 'computing' to have access
 sudo apt-get -y install wicd-curses wicd-gtk wicd-daemon
-sudo apt-get purge network-manager
+sudo apt-get -y purge network-manager
 
 gnome-terminal -e 'bash -c "wicd-curses"' &
 
