@@ -31,7 +31,7 @@ goog.require('Blockly.Blocks');
 /**
  * Common HSV hue for all blocks in this category.
  */
-Blockly.Blocks.brain.HUE = 260;
+Blockly.Blocks.turtlebot.HUE = 260;
 
 
 Blockly.Blocks['turtle_move_forwards'] = {
@@ -112,10 +112,11 @@ Blockly.Blocks['turtle_distance_left'] = {
 
 Blockly.Blocks['turtle_distance_right'] = {
   init: function() {
-    this.appendValueInput("rightdistance")
+    this.appendDummyInput()
         .appendField("Laser Distance Right");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
+//    this.setPreviousStatement(false);
+//    this.setNextStatement(false);
+    this.setOutput(true);
     this.setColour(0);
     this.setTooltip('this is the right distance value');
     this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');

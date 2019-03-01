@@ -1,4 +1,4 @@
-/**
+0/**
  * @license
  *
  * Copyright 2015 Erle Robotics
@@ -79,10 +79,7 @@ Blockly.Python['turtle_distance_left'] = function(block) {
 };
 
 Blockly.Python['turtle_distance_right'] = function(block) {
-
-    var varName = Blockly.Python.valueToCode(block, 'rightdistance', Blockly.Python.ORDER_ATOMIC);
-
-    var code = "";
-    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_distance_right.py");
-    return code + varName + " = distance_right\n"
+    return [
+        "numpy.nanmean(rospy.wait_for_message('/scan', LaserScan, timeout=5).ranges[590:639], dtype='float64')",
+        Blockly.Python.ORDER_ADDITION];
 };
