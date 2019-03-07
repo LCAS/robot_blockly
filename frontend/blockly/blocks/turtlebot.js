@@ -38,12 +38,11 @@ Blockly.Blocks['turtle_move_forwards'] = {
     init: function() {
         this.appendValueInput("velocity")
             .appendField("Forward Speed");
-        this.setInputsInline(true);
+        //this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(0);
         this.setTooltip('move forwards with this speed, and go');
-        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
     }
 };
 
@@ -51,12 +50,11 @@ Blockly.Blocks['turtle_move_backwards'] = {
     init: function() {
         this.appendValueInput("velocity")
             .appendField("Backward Speed");
-        this.setInputsInline(true);
+        //this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(0);
         this.setTooltip('move backwards with this speed');
-        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
     }
 };
 
@@ -64,12 +62,11 @@ Blockly.Blocks['turtle_turn_left'] = {
     init: function() {
         this.appendValueInput("rotation")
             .appendField("Rotation Left Speed");
-        this.setInputsInline(true);
+        //this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(0);
         this.setTooltip('turn left with this speed');
-        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
     }
 };
 
@@ -77,36 +74,42 @@ Blockly.Blocks['turtle_turn_right'] = {
     init: function() {
         this.appendValueInput("rotation")
             .appendField("Rotation Right Speed");
-        this.setInputsInline(true);
+        //this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setColour(0);
         this.setTooltip('turn right with this speed');
-        this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Intro.html');
+    }
+};
+
+Blockly.Blocks['turtle_sleep'] = {
+    init: function() {
+        this.appendValueInput("sleep")
+            .appendField("Sleep time (s)");
+        this.setPreviousStatement(true);
+        this.setNextStatement(true);
+        this.setColour(0);
+        this.setTooltip('Sleep for a number of seconds');
     }
 };
 
 Blockly.Blocks['turtle_distance_middle'] = {
   init: function() {
-    this.appendValueInput("middledistance")
+    this.appendDummyInput()
         .appendField("Laser Distance Middle");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
+    this.setOutput(true);
     this.setColour(0);
     this.setTooltip('this is the middle distance value');
-    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
   }
 };
 
 Blockly.Blocks['turtle_distance_left'] = {
   init: function() {
-    this.appendValueInput("leftdistance")
+    this.appendDummyInput()
         .appendField("Laser Distance Left");
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
+    this.setOutput(true);
     this.setColour(0);
     this.setTooltip('this is the left distance value');
-    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
   }
 };
 
@@ -114,11 +117,18 @@ Blockly.Blocks['turtle_distance_right'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Laser Distance Right");
-//    this.setPreviousStatement(false);
-//    this.setNextStatement(false);
     this.setOutput(true);
     this.setColour(0);
     this.setTooltip('this is the right distance value');
-    this.setHelpUrl('http://erlerobotics.com/docs/Robot_Operating_System/ROS/Blockly/Tutorials/Tutorial_1_Erle-Brain_Erle_Lidar_laser.html');
+  }
+};
+
+Blockly.Blocks['turtle_distance_all'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Laser Distance All");
+    this.setOutput(true);
+    this.setColour(0);
+    this.setTooltip('this is the right distance value');
   }
 };

@@ -60,26 +60,34 @@ Blockly.Python['turtle_turn_right'] = function(block) {
     return code
 }
 
+Blockly.Python['turtle_sleep'] = function(block) {
+    var varName = Blockly.Python.valueToCode(block, 'sleep', Blockly.Python.ORDER_ATOMIC);
+
+    var code = "sleep_time = " + varName + "\n";
+    code += "rospy.sleep(sleep_time)\n";
+    return code        
+};
+
 Blockly.Python['turtle_distance_middle'] = function(block) {
-
-    var varName = Blockly.Python.valueToCode(block, 'middledistance', Blockly.Python.ORDER_ATOMIC);
-
-    var code = "";
-    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_distance_middle.py");
-    return code + varName + " = distance_middle\n"
+    return [
+        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[50:589])",
+        Blockly.Python.ORDER_ADDITION];
 };
 
 Blockly.Python['turtle_distance_left'] = function(block) {
-
-    var varName = Blockly.Python.valueToCode(block, 'leftdistance', Blockly.Python.ORDER_ATOMIC);
-
-    var code = "";
-    code += Blockly.readPythonFile("../blockly/generators/python/scripts/turtlebot/turtle_distance_left.py");
-    return code + varName + " = distance_left\n"
+    return [
+        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[0:49])",
+        Blockly.Python.ORDER_ADDITION];
 };
 
 Blockly.Python['turtle_distance_right'] = function(block) {
     return [
-        "numpy.nanmean(rospy.wait_for_message('/scan', LaserScan, timeout=5).ranges[590:639], dtype='float64')",
+        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[590:639])",
+        Blockly.Python.ORDER_ADDITION];
+};
+
+Blockly.Python['turtle_distance_all'] = function(block) {
+    return [
+        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[:])",
         Blockly.Python.ORDER_ADDITION];
 };
