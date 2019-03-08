@@ -1,0 +1,7 @@
+<launch>
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+    <arg name="world_file" value="$(find uol_turtlebot_simulator)/worlds/object-search-training.world" />
+  </include>
+  <include file="$(find robot_blockly)/launch/robot_blockly.launch">
+  </include>
+</launch>
