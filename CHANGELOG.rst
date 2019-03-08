@@ -2,6 +2,68 @@
 Changelog for package robot_blockly
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added
+* Merge pull request `#5 <https://github.com/LCAS/robot_blockly/issues/5>`_ from LCAS/new_operators
+  New operators
+* new scheme
+* first improvements
+* updated distance sensor blocks and compressed files
+* syntax fix for distance sensor block
+* changed distance sensor block, and compressed files
+* adding manual start of wicd-daemon (not sure why necessary)
+* reducing need for manual interaction
+* update of setup script for networking setup
+* adding crontab setup to setup script
+* added install of nmap to blockly setup script
+* copied iptracker from https://github.com/marc-hanheide/network-scripts
+* add ip setup
+* new tmule based auto start
+* readme redirect to wiki for more instructions
+* create the autostart directory if not already there
+* sudo updates to the setup script
+* change script permission to executable
+* setup script to run after installation to set up autostart
+* modified launch script and added autostart entry
+* launch script for on turtlebot
+* call to closure compiler is now https not http, now updated and working again
+* keyboard interrupt
+* adding en.js to ensure present
+* removed not used elements
+* a little bit of branding change ;-)
+* gitignore and adding twist import
+* updated block source for turtlebot moving
+* add publisher to init
+* adding compressed files
+* minor modifications
+* adding two side distance sensors
+* middle distance sensing block now working
+* commented out blocks from other robots
+* adding new turtlebot blocks
+* updating variable link between blocks and generators
+* add first attempt at distance sensor block - don't know if works
+* adding turtlebot movement blocks
+* adding new python generators for turtlebot moving
+* changed maintainer and authors
+* create folder for languages if it doesn exist
+* more gitignore of generated files
+* more gitignore of generated files
+* removed language files
+* added to gitignore
+* robot is moving...
+* add blockly inline
+* removed blockly
+* updated to our own repo
+* changed back to python2
+* Merge branch 'master' of https://github.com/erlerobot/robot_blockly
+* pywebserver.py: Update listen port
+* Update README, support concentrated here
+* Merge pull request `#38 <https://github.com/LCAS/robot_blockly/issues/38>`_ from LCAS/upstream_master
+  adding missing dependency rospy
+* adding missing dependency rospy
+* Contributors: Lander Usategui San Juan, Marc Hanheide, Paul Baxter, Víctor Mayoral Vilches, paul-baxter, turtlebot
+
 0.1.1 (2016-11-15)
 ------------------
 * Merge pull request `#1 <https://github.com/LCAS/robot_blockly/issues/1>`_ from LCAS/marc-hanheide-patch-1
