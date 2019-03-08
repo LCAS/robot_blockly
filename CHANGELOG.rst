@@ -2,8 +2,8 @@
 Changelog for package robot_blockly
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.1.2 (2019-03-08)
+------------------
 * added
 * Merge pull request `#5 <https://github.com/LCAS/robot_blockly/issues/5>`_ from LCAS/new_operators
   New operators
