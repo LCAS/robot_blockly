@@ -411,7 +411,18 @@ def quaternion_matrix(quaternion):
         [    q[1, 3]-q[2, 0],     q[2, 3]+q[1, 0], 1.0-q[1, 1]-q[2, 2], 0.0],
         [                0.0,                 0.0,                 0.0, 1.0]])
 def euler_from_quaternion(quaternion, axes='sxyz'):
-    return euler_from_matrix(quaternion_matrix(quaternion), axes)''')
+    return euler_from_matrix(quaternion_matrix(quaternion), axes)
+
+
+last_scan = rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges
+
+def scan_cb(msg):
+    global last_scan
+    last_scan = msg.ranges
+
+scan_sub = rospy.Subscriber('/scan', LaserScan, scan_cb)
+
+''')
         target.write("\n")
         target.write("\n")
 

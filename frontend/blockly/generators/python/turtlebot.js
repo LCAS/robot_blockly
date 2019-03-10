@@ -70,24 +70,24 @@ Blockly.Python['turtle_sleep'] = function(block) {
 
 Blockly.Python['turtle_distance_middle'] = function(block) {
     return [
-        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[50:589])",
+        "numpy.nanmin(last_scan[50:589])",
         Blockly.Python.ORDER_ADDITION];
 };
 
 Blockly.Python['turtle_distance_left'] = function(block) {
     return [
-        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[0:49])",
+        "numpy.nanmin(last_scan[0:49])",
         Blockly.Python.ORDER_ADDITION];
 };
 
 Blockly.Python['turtle_distance_right'] = function(block) {
     return [
-        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[590:639])",
+        "numpy.nanmin(last_scan[590:639])",
         Blockly.Python.ORDER_ADDITION];
 };
 
 Blockly.Python['turtle_distance_all'] = function(block) {
     return [
-        "numpy.nanmin(rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges[:])",
+        "numpy.nanmin(last_scan[:])",
         Blockly.Python.ORDER_ADDITION];
 };
