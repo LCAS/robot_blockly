@@ -414,7 +414,7 @@ def euler_from_quaternion(quaternion, axes='sxyz'):
     return euler_from_matrix(quaternion_matrix(quaternion), axes)
 
 
-last_scan = rospy.wait_for_message('/scan', LaserScan, timeout=2).ranges
+last_scan = rospy.wait_for_message('/scan', LaserScan, timeout=16).ranges
 
 def scan_cb(msg):
     global last_scan
